@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MeetTogether · Tìm quán hẹn tiện đường</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="app">
+      <aside class="panel">
+        <header>
+          <div class="brand">Meet<span>Together</span></div>
+          <p class="tagline">Tìm quán hẹn tiện đường cho cả nhóm · TP.HCM</p>
+        </header>
+
+        <section>
+          <h2><span class="step">1</span> Mọi người đang ở đâu?</h2>
+          <ol id="people" class="people"></ol>
+          <form id="search-form" class="search">
+            <input id="q" placeholder="Địa chỉ, tên đường, toà nhà…" autocomplete="off" />
+            <button type="submit">Tìm</button>
+          </form>
+          <ul id="suggestions" class="suggestions"></ul>
+          <div class="row">
+            <button id="locate" type="button" class="ghost">
+              <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><circle cx="12" cy="12" r="4" fill="currentColor"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="12" r="7.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+              Vị trí của tôi
+            </button>
+            <span class="hint">hoặc bấm lên bản đồ để thêm</span>
+          </div>
+        </section>
+
+        <section>
+          <h2><span class="step">2</span> Hẹn ở đâu?</h2>
+          <div class="seg" role="radiogroup">
+            <label><input type="radio" name="kind" value="cafe" checked /><span>Cafe</span></label>
+            <label><input type="radio" name="kind" value="food" /><span>Ăn uống</span></label>
+            <label><input type="radio" name="kind" value="both" /><span>Cả hai</span></label>
+          </div>
+          <div class="seg" role="radiogroup">
+            <label><input type="radio" name="mode" value="total" checked /><span>Tổng đường ít nhất</span></label>
+            <label><input type="radio" name="mode" value="fair" /><span>Công bằng nhất</span></label>
+          </div>
+          <p class="hint" id="mode-hint"></p>
+        </section>
+
+        <button id="find" class="primary" disabled>Tìm điểm hẹn</button>
+        <p id="status" class="status" role="status"></p>
+        <ol id="results" class="results"></ol>
+      </aside>
+      <main id="map"></main>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
