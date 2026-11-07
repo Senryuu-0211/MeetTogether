@@ -20,13 +20,14 @@ export function estimateSeconds(meters: number): number {
 /**
  * Xếp hạng theo chi phí của từng người (thời gian hoặc khoảng cách).
  * - total: tổng nhỏ nhất, hoà thì xét người đi xa nhất.
- * - fair:  người đi xa nhất đi ít nhất, hoà thì xét tổng.
+ * - fair:  mọi người đi gần bằng nhau. Điểm = trung bình + (max − min):
+ *          phạt chênh lệch, nhưng vẫn tính trung bình để không chọn chỗ xa mà ai cũng đi lâu như nhau.
  */
 export function rank<T extends { times: number[] }>(items: T[], mode: Mode): T[] {
   const key = (t: number[]) => {
     const sum = t.reduce((a, b) => a + b, 0);
     const max = Math.max(...t);
-    return mode === 'total' ? [sum, max] : [max, sum];
+    return mode === 'total' ? [sum, max] : [sum / t.length + max - Math.min(...t), max];
   };
   return items
     .map((item) => ({ item, k: key(item.times) }))

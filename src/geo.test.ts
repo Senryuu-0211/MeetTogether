@@ -20,8 +20,18 @@ describe('rank', () => {
   it('total: tổng nhỏ nhất trước, hoà xét max', () => {
     expect(rank([b, c, a], 'total').map((x) => x.id)).toEqual(['a', 'b', 'c']);
   });
-  it('fair: max nhỏ nhất trước', () => {
+  it('fair: đi bằng nhau trước', () => {
     expect(rank([a, c, b], 'fair').map((x) => x.id)).toEqual(['b', 'c', 'a']);
+  });
+  it('fair: 18/18/14 thắng 17/17/7 (một người đi quá gần)', () => {
+    const uneven = { id: 'uneven', times: [17, 17, 7] };
+    const even = { id: 'even', times: [18, 18, 14] };
+    expect(rank([uneven, even], 'fair')[0].id).toBe('even');
+  });
+  it('fair: không chọn chỗ xa chỉ vì ai cũng đi lâu như nhau', () => {
+    const far = { id: 'far', times: [30, 30, 30] };
+    const near = { id: 'near', times: [17, 17, 7] };
+    expect(rank([far, near], 'fair')[0].id).toBe('near');
   });
   it('không sửa mảng gốc', () => {
     const items = [b, a];

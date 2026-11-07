@@ -16,7 +16,7 @@ const KINDS: Record<string, string[]> = {
 const KIND_LABEL: Record<string, string> = { cafe: 'Cafe', restaurant: 'Nhà hàng', fast_food: 'Đồ ăn nhanh', food_court: 'Khu ẩm thực' };
 const MODE_HINT: Record<Mode, string> = {
   total: 'Cả nhóm cộng lại đi ít đường nhất.',
-  fair: 'Người ở xa nhất phải đi ít nhất có thể.',
+  fair: 'Mọi người đi gần bằng nhau, không ai phải đi quá xa.',
 };
 const ROUTED_CANDIDATES = 40; // số quán tốt nhất (đường chim bay) đem đi tính đường thật
 const SHOWN_RESULTS = 8;
@@ -207,7 +207,7 @@ function renderResults() {
           <div class="chips">${r.times
             .map((t, i) => `<span class="chip" title="${esc(people[i].label)} · ${km(r.dists[i])}"><span class="dot" style="--c:${color(i)}">${i + 1}</span>${minutes(t)}</span>`)
             .join('')}</div>
-          <div class="summary">Tổng <b>${minutes(total)}</b> · Người xa nhất <b>${minutes(longest)}</b></div>
+          <div class="summary">Tổng <b>${minutes(total)}</b> · Lâu nhất <b>${minutes(longest)}</b> · Chênh lệch <b>${minutes(longest - Math.min(...r.times))}</b></div>
           <a href="${gmaps}" target="_blank" rel="noopener">Mở trên Google Maps ↗</a>
         </div>
       </li>`;
